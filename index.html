@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix FX - Onlayn Darsliklar</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix FX" width="160">
+      </div>
+      <nav>
+        <a href="#" class="nav-item active" onclick="showPage('home')">🏠 Bosh sahifa</a>
+        <a href="#" class="nav-item" onclick="showPage('my-courses')">📚 Mening kurslarim</a>
+        <a href="#" class="nav-item" onclick="showPage('all-courses')">🌐 Barcha kurslar</a>
+        
+        <div id="auth-section">
+          <!-- JavaScript orqali to'ldiriladi -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="main-content">
+      <header>
+        <h1>Netflix FX</h1>
+        <input type="text" id="searchInput" placeholder="Kurs yoki dars qidirish..." onkeyup="searchCourses()">
+      </header>
+
+      <!-- Home sahifasi -->
+      <div id="home-page">
+        <div class="hero">
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <h2>Python dasturlash asoslari</h2>
+            <p>0 dan professional darajagacha — 25 ta video dars</p>
+            <button class="start-btn" onclick="playSampleVideo()">Darsni boshlash</button>
+          </div>
+        </div>
+
+        <section class="section">
+          <h2>Yangiliklar</h2>
+          <div class="courses-row" id="new-courses"></div>
+        </section>
+
+        <section class="section">
+          <h2>Web dasturlash</h2>
+          <div class="courses-row" id="web-courses"></div>
+        </section>
+      </div>
+
+      <!-- Admin Panel (faqat adminlar uchun) -->
+      <div id="admin-page" class="hidden">
+        <h2>Admin Panel — Yangi video yuklash</h2>
+        <div class="admin-form">
+          <select id="videoPlatform">
+            <option value="youtube">YouTube</option>
+            <option value="vimeo">Vimeo</option>
+            <option value="dailymotion">Dailymotion</option>
+            <option value="rutube">Rutube</option>
+            <option value="mp4">MP4 (to'g'ridan-to'g'ri)</option>
+          </select>
+          <input type="text" id="courseTitle" placeholder="Kurs nomi" />
+          <input type="text" id="courseImg" placeholder="Rasm URL" />
+          <input type="text" id="videoInput" placeholder="Video link yoki ID" />
+          <button onclick="addNewCourse()">📤 Video Yuklash</button>
+        </div>
+        <p id="admin-message"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">✕</span>
+      <iframe id="videoPlayer" width="100%" height="540" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Auth Modal (Login / Register) -->
+  <div id="authModal" class="modal">
+    <div class="modal-content login-modal">
+      <h3 id="auth-title">Kirish</h3>
+      
+      <div id="login-form">
+        <input type="text" id="login-username" placeholder="Foydalanuvchi nomi" />
+        <input type="password" id="login-password" placeholder="Parol" />
+        <button onclick="loginUser()">Kirish</button>
+        <p onclick="switchToRegister()" style="cursor:pointer; color:#e50914; margin-top:15px;">Ro'yxatdan o'tish</p>
+      </div>
+
+      <div id="register-form" class="hidden">
+        <input type="text" id="reg-username" placeholder="Foydalanuvchi nomi" />
+        <input type="password" id="reg-password" placeholder="Parol" />
+        <button onclick="registerUser()">Ro'yxatdan o'tish</button>
+        <p onclick="switchToLogin()" style="cursor:pointer; color:#e50914; margin-top:15px;">Kirish</p>
+      </div>
+
+      <p id="auth-error" style="color:#ef4444; margin-top:10px;"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
